@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de bouton</title>
+    <style>
+    .transparentButton {
+        color: #fff;
+        border-radius: 4px;
+        background: #ff7620;
+        border: 2px solid #ff7620;
+        padding: 15px 20px;
+        font-weight: 700;
+        display: inline-block;
+        line-height: 1;
+        font-size: 16px;
+        text-align: center;
+        transition: all .3s;
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+
+    .transparentGreenButton {
+        color: #58c254;
+        border-radius: 4px;
+        border: 2px solid #58c254;
+        padding: 15px 20px;
+        font-weight: 700;
+        display: inline-block;
+        line-height: 1;
+        font-size: 16px;
+        text-align: center;
+        transition: all .3s;
+        text-decoration: none;
+        text-transform: capitalize;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin: 20px;
+        font-weight: bold;
+    }
+    select, input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        font-size: 18px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .menu-button {
+          display: block;
+          float: left;
+          border-radius: 5px;
+          background-color: #646464;
+          font-size: 15px;
+          color: #ffffff;
+          border: none;
+          padding: 10px;
+          text-align: center;
+          cursor: pointer;
+      }
+      .menu-button:hover {
+          background-color: #ff6200;
+      }
+      .tool-title {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+</style>
+</style>
+</head>
+<button class="menu-button" onclick="window.location.href='../index.html'"><</button>
+<body>
+    <h1 class="toggle-title">Générateur de boutons personnalisés</h1>
+    <!-- Formulaire pour créer un seul bouton -->
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>Créer un bouton</h2>
+        <label for="colorSelectSingle">Choisissez un style de bouton :</label>
+        <select id="colorSelectSingle" onchange="updateSingleButton()">
+            <option value="transparentButton">Orange</option>
+            <option value="transparentGreenButton">Vert</option>
+            <option value="orangeInvertedButton">Orange Inversé</option>
+            <option value="greenInvertedButton">Vert Inversé</option>
+        </select>
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkTextSingle">Texte :</label>
+        <input type="text" id="linkTextSingle" placeholder="Texte" oninput="updateSingleButton()">
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkHrefSingle">Lien URL :</label>
+        <input type="text" id="linkHrefSingle" placeholder="https://officeopro.com/" oninput="updateSingleButton()">
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="text-align: center;">
+            <a id="dynamicLinkSingle" class="transparentButton" href="https://officeopro.com/" data-wpel-link="internal" target="_self" rel="follow">Texte</a>
+        </p>
+    </div>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <button style="border-style:none; background-color: #588888; color: #fff; border-radius: 5px; padding: 10px" onclick="copySingleButtonCode()">Copier le code</button>
+    </div>
+
+    <!-- Formulaire pour créer deux boutons alignés -->
+    <div style="text-align: center; margin-top: 100px;">
+        <h2>Créer deux boutons alignés</h2>
+        <label for="colorSelect1">Choisir le style du Bouton 1 :</label>
+        <select id="colorSelect1" onchange="updateLink(1)">
+            <option value="transparentButton">Orange</option>
+            <option value="transparentGreenButton">Vert</option>
+            <option value="orangeInvertedButton">Orange Inversé</option>
+            <option value="greenInvertedButton">Vert Inversé</option>
+        </select>
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkText1">Texte Bouton 1:</label>
+        <input type="text" id="linkText1" placeholder="J’ai besoin d’un(e) secrétaire" oninput="updateLink(1)">
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkHref1">Lien Bouton 1 :</label>
+        <input type="text" id="linkHref1" placeholder="https://officeopro.com/" oninput="updateLink(1)">
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="colorSelect2">Choisir le style du Bouton 2 :</label>
+        <select id="colorSelect2" onchange="updateLink(2)">
+            <option value="transparentButton">Orange</option>
+            <option value="transparentGreenButton">Vert</option>
+            <option value="orangeInvertedButton">Orange Inversé</option>
+            <option value="greenInvertedButton">Vert Inversé</option>
+        </select>
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkText2">Texte Bouton 2 :</label>
+        <input type="text" id="linkText2" placeholder="Je souhaite être rappelé(e)" oninput="updateLink(2)">
+    </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <label for="linkHref2">Lien Bouton 2 :</label>
+        <input type="text" id="linkHref2" placeholder="https://officeopro.com/" oninput="updateLink(2)">
+    </div>
+
+    <div class="row" id="buttonsRow" style="margin-top: 20px;">
+        <div class="col-md-6">
+            <p style="text-align: center;">
+                <a id="dynamicLink1" class="transparentButton" href="https://officeopro.com/" data-wpel-link="internal" target="_self" rel="follow">
+                    J’ai besoin d’un(e) secrétaire
+                </a>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p style="text-align: center;">
+                <a id="dynamicLink2" class="transparentButton" href="https://officeopro.com/" 
+data-wpel-link="internal" target="_self" rel="follow">
+                    Je souhaite être rappelé(e)
+                </a>
+            </p>
+        </div>
+    </div>
+    <br>
+    <div style="text-align: center; margin-top: 20px;">
+        <button style="border-style:none; background-color: #588888; color: #fff; border-radius: 5px; padding: 10px" onclick="copyLinkCode()">Copier le code</button>
+    </div>
+<script>
+    function updateLink(buttonNumber) {
+    var select = document.getElementById('colorSelect' + buttonNumber);
+    var link = document.getElementById('dynamicLink' + buttonNumber);
+    var text = document.getElementById('linkText' + buttonNumber).value || (buttonNumber === 1 ? 'J’ai besoin d’un(e) secrétaire' : 'Je souhaite être rappelé(e)');
+    var hrefPath = document.getElementById('linkHref' + buttonNumber).value || '';
+    var className = select.value;
+
+    link.textContent = text;
+    link.href = hrefPath;
+    link.className = '';
+
+    if (className === 'orangeInvertedButton') {
+        link.style.color = '#ff7620';
+        link.style.backgroundColor = '#fff';
+        link.style.border = '2px solid #ff7620';
+        link.style.fontWeight = '700';
+        link.style.fontSize = '16px';
+        link.style.lineHeight = '1';
+        link.style.padding = '15px 20px';
+        link.style.borderRadius = '4px';
+        link.style.textAlign = 'center';
+        link.style.textDecoration = 'none';
+        link.style.display= 'inline-block';
+        link.style.textTransform= 'uppercase';
+    } else if (className === 'greenInvertedButton') {
+        link.style.color = '#fff';
+        link.style.backgroundColor = '#58c254';
+        link.style.border = '2px solid #58c254';
+        link.style.fontWeight = '700';
+        link.style.fontSize = '16px';
+        link.style.lineHeight = '1';
+        link.style.padding = '15px 20px';
+        link.style.borderRadius = '4px';
+        link.style.textAlign = 'center';
+        link.style.textDecoration = 'none';
+        link.style.display= 'inline-block';
+        link.style.textTransform= 'uppercase';
+    } else {
+        link.className = className;
+        link.style.color = '';
+        link.style.backgroundColor = '';
+        link.style.border = '';
+        link.style.fontWeight = '';
+        link.style.fontSize = '';
+        link.style.lineHeight = '';
+        link.style.padding = '';
+        link.style.margin = '';
+        link.style.borderRadius = '';
+        link.style.textAlign = '';
+        link.style.transition = '';
+        link.style.textDecoration = '';
+    }
+}
+
+function updateSingleButton() {
+    var select = document.getElementById('colorSelectSingle');
+    var link = document.getElementById('dynamicLinkSingle');
+    var text = document.getElementById('linkTextSingle').value || 'Texte du bouton';
+    var hrefPath = document.getElementById('linkHrefSingle').value || '#';
+    var className = select.value;
+
+    link.textContent = text;
+    link.href = hrefPath;
+    link.className = '';
+
+    if (className === 'orangeInvertedButton') {
+        link.style.color = '#ff7620';
+        link.style.backgroundColor = '#fff';
+        link.style.border = '2px solid #ff7620';
+        link.style.fontWeight = '700';
+        link.style.fontSize = '16px';
+        link.style.lineHeight = '1';
+        link.style.padding = '15px 20px';
+        link.style.borderRadius = '4px';
+        link.style.textAlign = 'center';
+        link.style.textDecoration = 'none';
+        link.style.display= 'inline-block';
+        link.style.textTransform= 'uppercase';
+    } else if (className === 'greenInvertedButton') {
+        link.style.color = '#fff';
+        link.style.backgroundColor = '#58c254';
+        link.style.border = '2px solid #58c254';
+        link.style.fontWeight = '700';
+        link.style.fontSize = '16px';
+        link.style.lineHeight = '1';
+        link.style.padding = '15px 20px';
+        link.style.borderRadius = '4px';
+        link.style.textAlign = 'center';
+        link.style.textDecoration = 'none';
+        link.style.display= 'inline-block';
+        link.style.textTransform= 'uppercase';
+    } else {
+        link.className = className;
+        link.style.color = '';
+        link.style.backgroundColor = '';
+        link.style.border = '';
+        link.style.fontWeight = '';
+        link.style.fontSize = '';
+        link.style.lineHeight = '';
+        link.style.padding = '';
+        link.style.margin = '';
+        link.style.borderRadius = '';
+        link.style.textAlign = '';
+        link.style.transition = '';
+        link.style.textDecoration = '';
+    }
+}
+
+function copyLinkCode() {
+    var row = document.getElementById('buttonsRow');
+    var rowHTML = row.outerHTML;
+
+    navigator.clipboard.writeText(rowHTML).then(function() {
+        alert('Le code des liens a été copié dans le presse-papiers.');
+    }, function(err) {
+        console.error('Erreur lors de la copie du code : ', err);
+    });
+}
+
+function copySingleButtonCode() {
+    var link = document.getElementById('dynamicLinkSingle');
+    var style = link.getAttribute('style') ?  `style="${link.getAttribute('style')}"` : '';
+    var linkCode = `<a class="${link.className}" href="${link.href}" ${style}>${link.textContent}</a>`;
+    
+    navigator.clipboard.writeText(linkCode).then(function() {
+        alert('Le code du lien a été copié dans le presse-papiers.');
+    }, function(err) {
+        console.error('Erreur lors de la copie du code : ', err);
+    });
+}
+</script>
+</body>
+</html>

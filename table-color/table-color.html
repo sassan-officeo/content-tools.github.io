@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
+    <title>Couleur tableau</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+        text-align: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      textarea {
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .load-button {
+        background-color: #007bff;
+      }
+
+      .load-button:hover {
+        background-color: #0056b3;
+      }
+
+      .copy-button {
+        background-color: #28a745;
+      }
+
+      .copy-button:hover {
+        background-color: #218838;
+      }
+
+      .toggle-button {
+        background-color: #d46e00;
+      }
+
+      .toggle-button:hover {
+        background-color: #783e00;
+      }
+
+      #table-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .menu-button {
+          display: block;
+          float: left;
+          border-radius: 5px;
+          background-color: #646464;
+          font-size: 15px;
+          color: #ffffff;
+          border: none;
+          padding: 10px;
+          text-align: center;
+          cursor: pointer;
+      }
+      .menu-button:hover {
+          background-color: #ff6200;
+      }
+      .tool-title {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-bottom: 50px;
+      }
+    </style>
+    <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
+    <h1 class="tool-title">Modification des couleurs du tableau</h1>
+    <form>
+      <textarea
+        id="table-code"
+        rows="10"
+        cols="50"
+        placeholder="Entrez le code HTML du tableau ici..."
+      ></textarea
+      ><br />
+      <div class="button-container">
+        <button type="button" class="load-button" onclick="loadTable()">
+          Charger le tableau
+        </button>
+        <button type="button" class="toggle-button" onclick="toggleColors()">
+          Changer la couleur
+        </button>
+        <button type="button" class="copy-button" onclick="copyTable()">
+          Copier le code du tableau
+        </button>
+      </div>
+    </form>
+    <div id="table-container"></div>
+    <script src="script.js"></script>
+  </head>
+</html>
+<script>
+    function loadTable() {
+    const tableCode = document.getElementById('table-code').value;
+    document.getElementById('table-container').innerHTML = tableCode;
+}
+
+function toggleColors() {
+    const rows = document.querySelectorAll('#table-container tr');
+    rows.forEach(row => {
+        const currentBgColor = window.getComputedStyle(row).backgroundColor;
+        if (currentBgColor === 'rgb(255, 239, 217)') { // #ffefd9 in RGB
+            row.style.backgroundColor = '#e7fae6';
+        } else if (currentBgColor === 'rgb(231, 250, 230)') { // #e7fae6 in RGB
+            row.style.backgroundColor = '#ffefd9';
+        }
+    });
+
+    const links = document.querySelectorAll('#table-container a');
+    links.forEach(link => {
+        const currentColor = window.getComputedStyle(link).color;
+        if (currentColor === 'rgb(88, 194, 84)') { // #58c254 in RGB
+            link.style.color = '#ff7620';
+            link.style.borderBottomColor = '#ff7620';
+        } else if (currentColor === 'rgb(255, 118, 32)') { // #ff7620 in RGB
+            link.style.color = '#58c254';
+            link.style.borderBottomColor = '#58c254';
+        }
+    });
+}
+
+function copyTable() {
+    const table = document.getElementById('table-container').innerHTML;
+    const textarea = document.createElement('textarea');
+    textarea.value = table;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('Code du tableau copié dans le presse-papiers');
+}
+</script>
+</body>
+</html>

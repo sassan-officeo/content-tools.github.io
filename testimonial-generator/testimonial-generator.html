@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Générateur de témoignage</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 20px;
+                padding: 20px;
+            }
+    
+            h1, h2 {
+                text-align: center;
+            }
+    
+            a {
+                color: #ff7620;
+                font-weight: bold;
+            }
+    
+            form {
+                background-color: #ffffff;
+                padding: 25px;
+                border-radius: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            textarea {
+                height: 80px;
+            }
+    
+            label {
+                color: #232b63;
+                font-weight: bold;
+            }
+    
+            input[type="text"],
+            input[type="url"],
+            textarea {
+                width: 80%;
+                padding: 10px;
+                margin: 5px 0 10px 0;
+                border: 1px solid #cccccc;
+                border-radius: 20px;
+            }
+    
+            input[type="submit"],
+            button {
+                background-color: #34406c;
+                color: #ffffff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                font-size: 16px;
+                margin: 10px auto;
+                display: block;
+            }
+    
+            input[type="submit"]:hover,
+            button:hover {
+                background-color: #d85c1a;
+            }
+    
+    
+            .radio-group label {
+                margin-right: 10px;
+                margin-left: 5px;
+            }
+    
+            textarea {
+                height: 80px;
+            }
+    
+            #result {
+                display: none;
+            }
+    
+            #preview {
+                padding: 20px;
+                background-color: #ffffff;
+                border: 1px solid #cccccc;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            #preview img {
+                max-width: 100px;
+                border-radius: 50%;
+            }
+    
+            #preview p {
+                margin: 5px 0;
+            }
+    
+            .copy-button {
+                background-color: #ff7620;
+                color: #ffffff;
+                padding: 15px 25px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 18px;
+                margin-top: 15px;
+            }
+    
+            .copy-button:hover {
+                background-color: #ff8c42;
+            }
+    
+            .qa-pair {
+                position: relative;
+                margin-bottom: 20px;
+            }
+    
+            .delete-button {
+                background-color: rgb(252, 85, 85);
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            .menu-button {
+                display: block;
+                float: left;
+                border-radius: 5px;
+                background-color: #646464;
+                font-size: 15px;
+                color: #ffffff;
+                border: none;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+            }
+            .menu-button:hover {
+                background-color: #ff6200;
+            }
+        </style>
+        <script>
+            function generateTestimonial() {
+                var title = document.getElementById('title').value;
+                var image = document.getElementById('image-url').value;
+                var link = document.getElementById('link').value;
+                var position = document.querySelector('input[name="imagePosition"]:checked').value;
+                var imageStyle = position === 'left' ? 'float: left; margin-right: 2rem;' : 'float: right; margin-left: 2rem;';
+                
+                var questionsAnswers = document.querySelectorAll('.qa-pair');
+                var qaHTML = '';
+                questionsAnswers.forEach(function(pair) {
+                    var question = pair.querySelector('.question').value;
+                    var answer = pair.querySelector('.answer').value;
+                    qaHTML += `<p>${question}</p>
+                               <p>${answer}</p>`;
+                });
+    
+                var paragraphs = document.querySelectorAll('.paragraph');
+                paragraphs.forEach(function(paragraph) {
+                    var text = paragraph.querySelector('.paragraph-text').value;
+                    qaHTML += `<p>${text}</p>`;
+                });
+    
+                var testimonialHTML = `
+    <hr>
+    <div>
+        <h2>${title}</h2>
+        <img src="${image}" alt="${title}" style="max-width: 100px; border-radius: 50%; ${imageStyle}">
+        <div>
+            ${qaHTML}
+            <p style="text-align: center;">&ndash;&gt; <a href="${link}" data-wpel-link="internal" target="_self" rel="follow">Témoignage complet</a> &lt;&ndash;</p>
+        </div>
+    </div>
+    <hr>`;
+    
+                document.getElementById('result').value = testimonialHTML.trim();
+                document.getElementById('preview').innerHTML = testimonialHTML.trim();
+            }
+    
+            function addQAPair() {
+                var container = document.getElementById('qa-container');
+                var newPair = document.createElement('div');
+                newPair.className = 'qa-pair';
+                newPair.innerHTML = `
+                    <label for="question">Question :</label><br>
+                    <textarea class="question" name="question"></textarea><br><br>
+                    <label for="answer">Réponse :</label><br>
+                    <textarea class="answer" name="answer"></textarea><br><br>
+                `;
+                container.appendChild(newPair);
+            }
+    
+            function addParagraph() {
+                var container = document.getElementById('qa-container');
+                var newParagraph = document.createElement('div');
+                newParagraph.className = 'paragraph';
+                newParagraph.innerHTML = `
+                    <label for="paragraph">Paragraphe :</label><br>
+                    <textarea class="paragraph-text" name="paragraph"></textarea>
+                `;
+                container.appendChild(newParagraph);
+            }
+    
+            function deleteElement() {
+                var container = document.getElementById('qa-container');
+                if (container.lastElementChild) {
+                    container.removeChild(container.lastElementChild);
+                }
+            }
+    
+            function generateImageSearchUrl() {
+                var imageName = document.getElementById('image-name').value;
+                if (imageName) {
+                    var searchUrl = `https://officeopro.com/wp-admin/upload.php?mode=list&attachment-filter=post_mime_type%3Aimage&m=0&imagify-status=0&filter_action=Filtrer&s=${encodeURIComponent(imageName)}&action=-1&paged=1&action2=-1&affected&_ajax_nonce=3933f3ee64&ps`;
+                    document.getElementById('image-search-link').href = searchUrl;
+                    document.getElementById('image-search-link').style.display = 'inline';
+                } else {
+                    document.getElementById('image-search-link').style.display = 'none';
+                }
+            }
+    
+            function copyToClipboard() {
+                var copyText = document.getElementById('result').value;
+                var tempInput = document.createElement('textarea');
+                tempInput.value = copyText;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("Code copié dans le presse-papiers !");
+            }
+        </script>
+    </head>
+    <body>
+        <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
+        <h1 class="tool-title">Générateur de témoignage</h1>
+        <form onsubmit="event.preventDefault(); generateTestimonial();">
+            <label for="title">Titre :</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+    
+            <div id="qa-container">
+                <div class="qa-pair">
+                    <label for="question">Question :</label><br>
+                    <textarea class="question" name="question"></textarea><br><br>
+                    <label for="answer">Réponse :</label><br>
+                    <textarea class="answer" name="answer"></textarea><br><br>
+                </div>
+            </div>
+    
+            <button type="button" onclick="addQAPair()">Ajouter une question/réponse</button>
+            <button type="button" onclick="addParagraph()">Ajouter un paragraphe</button>
+            <button type="button" class="delete-button" onclick="deleteElement()">Supprimer</button><br><br>
+    
+            <label for="image-name">Saisir le nom de l'image :</label><br>
+            <input type="text" id="image-name" name="image-name" oninput="generateImageSearchUrl()"><br>
+            <a id="image-search-link" href="#" target="_blank" style="display: none;">Rechercher dans la médiathèque</a><br><br>
+    
+            <label for="image-url">Insérer l'URL de l'image :</label><br>
+            <input type="url" id="image-url" name="image-url"><br><br>
+    
+            <div class="radio-group">
+                <label>Position de l'image :</label>
+                <input type="radio" id="left" name="imagePosition" value="left" checked>
+                <label for="left">Gauche</label>
+                <input type="radio" id="right" name="imagePosition" value="right">
+                <label for="right">Droite</label>
+            </div><br><br>
+    
+            <label for="link">Lien vers le témoignage complet :</label><br>
+            <input type="url" id="link" name="link" required><br><br>
+    
+            <input type="submit" value="Générer le témoignage">
+        </form>
+    
+        <input type="hidden" id="result">
+        <h2>Aperçu</h2>
+        <div id="preview"></div>
+        <button class="copy-button" onclick="copyToClipboard()">Copier le Code HTML</button>
+    </body>
+</html>
