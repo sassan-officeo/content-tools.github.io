@@ -1,149 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marketing - Outils content</title>
     <style>
-        body {
-            font-family: Calibri;
-            background-color: #ffffff;
-            color: #ffffff;
-        }
-        h1 {
-            font-size: 35px;
-            color: #ff7620;
-            text-align: center;
-            font-weight: 500;
-        }
-        .container {
-            padding: 5px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .tool {
-            background-color: #45464e;
-            border-radius: 15px;
-            padding: 10px;
-            width: calc(25% - 20px);
-            box-sizing: border-box;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        .tool:hover {
-            background-color: #ba4a05;
-        }
-        .tool img {
-            max-width: 90%;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .tool h3 {
-            margin: 20px 0 5px;
-            font-size: 1.3em;
-        }
-        .tool p {
-            font-size: 1em;
-            color: #d6d6d6;
-        }
-        .tool a {
-            color: #ffffff;
-            text-decoration: none;
-            display: block;
-            margin: 5px 0;
-        }
-
-        @media (max-width: 1200px) {
-            .tool {
-                width: calc(33.33% - 20px);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .tool {
-                width: calc(50% - 20px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .tool {
-                width: calc(100% - 20px);
-            }
-        }
+      body {
+        font-family: Calibri;
+        background-color: #ffffff;
+        color: #ffffff;
+      }
+      h1 {
+        font-size: 35px;
+        color: #ff7620;
+        text-align: center;
+        font-weight: 600;
+      }
+      .container {
+        padding: 5px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .tool {
+        background-color: #45464e;
+        border-radius: 15px;
+        padding: 10px;
+        width: calc(25% - 20px);
+        box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 10px;
+        float: left;
+      }
+      .container :hover{
+        background-color: #ba4a05;
+      }
+      .tool img {
+        max-width: 85%;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .tool h3 {
+        margin: 15px 0 10px;
+        font-size: 1.3em;
+      }
+      .tool p {
+        font-size: 1em;
+        color: #ececec;
+      }
+      .tool a {
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        margin: 10px 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>[MKG] Outils Content</h1>
     <div class="container">
-        <!-- summary-generator -->
-        <div class="tool">
-            <a href="summary-generator/summary-generator.html">
-                <img src="assets/summary.png" alt="sommaire" />
-                <h3>Générateur de Sommaire</h3>
-                <p>Créer un sommaire à partir des titres H2 et leurs IDs</p>
-            </a>
-        </div>
-        <!-- faq generator -->
-        <div class="tool">
-            <a href="faq-generator/faq-generator.html">
-                <img src="assets/mini-faq.png" alt="faq" />
-                <h3>Générateur de mini FAQ</h3>
-                <p>Créer les questions FAQ pour les pages Service ou Assistant</p>
-            </a>
-        </div>
-        <!-- testimonial  generator -->
-        <div class="tool">
-            <a href="testimonial-generator/testimonial-generator.html">
-                <img src="assets/temoignage.png" alt="temoignage" />
-                <h3>Générateur de témoignage</h3>
-                <p>Créer un témoignage pour l'insérer dans une page</p>
-            </a>
-        </div>
-        <!-- table-generator -->
-        <div class="tool">
-            <a href="table-generator/table-generator.html">
-                <img src="assets/table.png" alt="bouton" />
-                <h3>Générateur de tableau</h3>
-                <p>Créer un tableau pour les raccourcis en bas de page</p>
-            </a>
-        </div>
-        <!-- homothetic-logos -->
-        <div class="tool">
-            <a href="homothetic-logos/homothetic-logos.html">
-                <img src="assets/homothetic-logos.png" alt="mur-logos" />
-                <h3>Mur de logos</h3>
-                <p>Copier les différents mur de logos homothétiques</p>
-            </a>
-        </div>
-        <!-- clickable-area -->
-        <div class="tool">
-            <a href="clickable-area/clickable-area.html">
-                <img src="assets/clickable-area.png" alt="zone-cliquable" />
-                <h3>Supprimer zone cliquable</h3>
-                <p>Enlever la zone cliquable en dehors de l'image</p>
-            </a>
-        </div>
-        <!-- button-generator -->
-        <div class="tool">
-            <a href="button-generator/button-generator.html">
-                <img src="assets/button.png" alt="boutons" />
-                <h3>Générateur de boutons</h3>
-                <p>Créez des boutons personnalisés du style Service ou Assistant</p>
-            </a>
-        </div>
-        <!-- table color changer -->
-        <div class="tool">
-            <a href="table-color/table-color.html">
-                <img src="assets/table-color.png" alt="couleurs-tableau" />
-                <h3>Modifier couleur tableau</h3>
-                <p>Changer la couleur d'un tableau existant</p>
-            </a>
-        </div>
+      <!-- summary-generator -->
+      <div class="tool">
+        <a href="summary-generator/summary-generator.html">
+          <img src="assets/summary.png" alt="sommaire" />
+          <h3>Sommaire</h3>
+          <p>Créer un sommaire à partir des titres H2 et leurs IDs</p>
+        </a>
+      </div>
+      <!-- faq generator -->
+      <div class="tool">
+        <a href="faq-generator/faq-generator.html">
+          <img src="assets/mini-faq.png" alt="faq" />
+          <h3>Mini FAQ</h3>
+          <p>Créer les questions FAQ pour les pages Service ou Assistant</p>
+        </a>
+      </div>
+      <!-- testimonial  generator -->
+      <div class="tool">
+        <a href="testimonial-generator/testimonial-generator.html">
+          <img src="assets/temoignage.png" alt="temoignage" />
+          <h3>Témoignage</h3>
+          <p>Créer un témoignage pour l'insérer dans une page</p>
+        </a>
+      </div>
+      <!-- table-generator -->
+      <div class="tool">
+        <a href="table-generator/table-generator.html">
+          <img src="assets/table.png" alt="bouton" />
+          <h3>Tableau</h3>
+          <p>Créer un tableau pour les raccourcis en bas de page</p>
+        </a>
+      </div>
+      <!-- homothetic-logos -->
+      <div class="tool">
+        <a href="homothetic-logos/homothetic-logos.html">
+          <img src="assets/homothetic-logos.png" alt="mur-logos" />
+          <h3>Mur de logos</h3>
+          <p>Copier les différents mur de logos homothétiques</p>
+        </a>
+      </div>
+      <!-- clickable-area -->
+      <div class="tool">
+        <a href="clickable-area/clickable-area.html">
+          <img src="assets/clickable-area.png" alt="zone-cliquable" />
+          <h3>Supprimer zone cliquable</h3>
+          <p>Enlever la zone cliquable en dehors de l'image</p>
+        </a>
+      </div>
+      <!-- button-generator -->
+      <div class="tool">
+        <a href="button-generator/button-generator.html">
+          <img src="assets/button.png" alt="boutons" />
+          <h3>Boutons personnalisés</h3>
+          <p>Créez des boutons personnalisés du style Service ou Assistant</p>
+        </a>
+      </div>
+      <!-- table color changer -->
+      <div class="tool">
+        <a href="table-color/table-color.html">
+          <img src="assets/table-color.png" alt="couleurs-tableau" />
+          <h3>Modifier couleur tableau</h3>
+          <p>Changer la couleur d'un tableau existant</p>
+        </a>
+      </div>
     </div>
-</body>
+  </body>
 </html>

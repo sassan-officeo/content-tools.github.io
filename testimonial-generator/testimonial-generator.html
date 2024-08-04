@@ -253,8 +253,10 @@
     
             <label for="image-name">Saisir le nom de la personne du témoignage :</label><br>
             <input type="text" id="image-name" name="image-name" oninput="generateImageSearchUrl()"><br>
-            <a id="image-search-link" href="#" target="_blank" style="display: none;">Rechercher dans la médiathèque</a><br><br>
-            <img style="max-height: 100px;" src="img-url.png" alt="img-url"><br>
+            <div id="image-search-link" style="display: none;">
+                <a href="#" target="_blank">Rechercher dans la médiathèque</a>
+                <img style="max-height: 100px; margin: 10px; display: block;" src="img-url.png"><br>
+            </div>
             <label for="image-url">Coller l'URL de l'image :</label>
             <input type="url" id="image-url" name="image-url"><br><br>
     
