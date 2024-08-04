@@ -5,97 +5,130 @@
     <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
     <title>Supprimer zone cliquable</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    form {
-        padding: 10px;
-        margin-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .form-group {
-        margin-bottom: 10px;
-    }
-    
-    .form-group-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 650px;
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    input[type="text"], textarea {
-        width: 300px;
-        border-radius: 5px;
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-    
-    button {
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    
-    .message {
-        margin-top: 8px;
-        font-size: 16px;
-        color: green;
-    }
-    .menu-button {
-        position: absolute;
-        left: 50px;
-        border-radius: 5px;
-        background-color: #646464;
-        font-size: 15px;
-        color: #ffffff;
-        border: none;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        margin-left: 0;
-    }
-      .menu-button:hover {
-          background-color: #ff6200;
-      }
-      .tool-title {
-        justify-content: center;
-        margin-top: 50px;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        form {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ff6200;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #e55b00;
+        }
+        
+        .message {
+            margin-top: 10px;
+            font-size: 16px;
+            color: green;
+        }
+
+        .menu-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            border-radius: 5px;
+            background-color: #646464;
+            font-size: 15px;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #ff6200;
+        }
+
+        .tool-title {
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .form-group-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .form-group textarea {
+            display: none;
+        }
+
+        .centered-container {
+            text-align: center;
+            padding: 10px;
+        }
     </style>
-    </head>
-    <body>
+</head>
+<body>
     <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
     <h1 class="tool-title">Supprimer la zone cliquable autour d'une image</h1>
-    <div style="text-align: center;">
+    <div class="centered-container">
         <a id="modifiedLink" href="https://officeopro.com/comparatif-solutions-assistance-administrative/officeo-vs-interim/" data-wpel-link="internal" target="_self" rel="noopener follow" style="display: inline-block;border-bottom: none;">
-            <img id="modifiedImg" loading="lazy" decoding="async" class="aligncenter wp-image-47898 size-full" src="https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim.png" alt="" width="300" height="300" srcset="https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim.png 300w, https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim-150x150.png 150w" sizes="(max-width: 300px) 100vw, 300px">
+            <img id="modifiedImg" loading="lazy" decoding="async" class="aligncenter wp-image-47898 size-full" src="https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim.png" alt="" width="200" height="200" srcset="https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim.png 300w, https://officeopro.com/wp-content/uploads/2021/06/reassurance-interim-150x150.png 150w" sizes="(max-width: 300px) 100vw, 300px">
         </a>
     </div>
     
     <form id="attributeForm">
         <div class="form-group">
-            <label for="href">Adresse du lien :</label>
-            <input type="text" id="href" name="href">
+            <label for="src">URL de l'image :</label>
+            <input type="text" id="src" name="src">
         </div>
         <div class="form-group">
-            <label for="src">Adresse de l'image :</label>
-            <input type="text" id="src" name="src">
+            <label for="href">URL du lien :</label>
+            <input type="text" id="href" name="href">
         </div>
         <button type="button" onclick="updateAttributes()">Modifier</button>
     </form>
@@ -103,58 +136,58 @@
     
     <div class="form-group-container">
         <div class="form-group">
-            <label for="newCode">Nouveau code :</label>
             <textarea id="newCode" rows="10" cols="50" readonly></textarea>
         </div>
-        <div class="form-group">
-            <button type="button" onclick="copyToClipboard()">Copier le nouveau code</button>
-        </div>
     </div>
-    <p>Insérer ensuite le code dans la page</p>
+    <div class="form-group">
+        <button type="button" onclick="copyToClipboard()">Copier le nouveau code</button>
+    </div>
 
     <script>
         function updateAttributes() {
-    var href = document.getElementById('href').value;
-    var src = document.getElementById('src').value;
+            var href = document.getElementById('href').value;
+            var src = document.getElementById('src').value;
 
-    var link = document.querySelector('a');
-    var img = document.querySelector('img');
+            var link = document.querySelector('a');
+            var img = document.querySelector('img');
 
-    if (href) {
-        link.setAttribute('href', href);
-    }
-    if (src) {
-        img.setAttribute('src', src);
+            if (href) {
+                link.setAttribute('href', href);
+            }
+            if (src) {
+                img.setAttribute('src', src);
 
-        // Generate srcset based on src
-        var srcBase = src.substring(0, src.lastIndexOf('.'));
-        var srcExt = src.substring(src.lastIndexOf('.'));
-        var srcset = `${srcBase}${srcExt} 300w, ${srcBase}-150x150${srcExt} 150w`;
-        img.setAttribute('srcset', srcset);
-    }
+                // Generate srcset based on src
+                var srcBase = src.substring(0, src.lastIndexOf('.'));
+                var srcExt = src.substring(src.lastIndexOf('.'));
+                var srcset = `${srcBase}${srcExt} 300w, ${srcBase}-150x150${srcExt} 150w`;
+                img.setAttribute('srcset', srcset);
+            }
 
-    var message = document.getElementById('message');
-    message.textContent = "Code bien modifié";
+            var message = document.getElementById('message');
+            message.textContent = "Code bien modifié";
 
-    var newCode = `<div style="text-align: center;">
-    <a href="${href}" data-wpel-link="internal" target="_self" rel="noopener follow" style="display: inline-block;border-bottom: none;">
-        <img loading="lazy" decoding="async" class="aligncenter wp-image-47898 size-full" src="${src}" alt="" width="300" height="300" srcset="${srcset}" sizes="(max-width: 300px) 100vw, 300px">
-    </a>
-</div>`;
+            var newCode = `<div style="text-align: center;">
+                <a href="${href}" data-wpel-link="internal" target="_self" rel="noopener follow" style="display: inline-block;border-bottom: none;">
+                    <img loading="lazy" decoding="async" class="aligncenter wp-image-47898 size-full" src="${src}" alt="" width="300" height="300" srcset="${srcset}" sizes="(max-width: 300px) 100vw, 300px">
+                </a>
+            </div>`;
 
-    document.getElementById('newCode').value = newCode;
-}
+            document.getElementById('newCode').value = newCode;
+        }
 
-function copyToClipboard() {
-    var copyText = document.getElementById("newCode");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // Pour les mobiles
+        function copyToClipboard() {
+            var copyText = document.getElementById("newCode");
+            copyText.style.display = "block"; // Afficher temporairement le textarea pour la sélection
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // Pour les mobiles
 
-    document.execCommand("copy");
+            document.execCommand("copy");
+            copyText.style.display = "none"; // Masquer à nouveau le textarea
 
-    var message = document.getElementById('message');
-    message.textContent = "Code copié dans le presse-papiers";
-}
-</script>
+            var message = document.getElementById('message');
+            message.textContent = "Code copié dans le presse-papiers";
+        }
+    </script>
 </body>
 </html>
