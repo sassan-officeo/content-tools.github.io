@@ -1,291 +1,304 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de mini FAQ</title>
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      max-width: 90%;
-    }
-    
-    form {
-      margin-bottom: 20px;
-    }
-    
-    label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-    
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-    
-    button {
-      padding: 10px 20px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    
-    button:hover {
-      background-color: #218838;
-    }
-    
-    h2 {
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 42px;
-      margin: 30px 0 0;
-      text-align: center;
-      color: #45464e;
-    }
-    
-    h3 {
-      font-size: 24px;
-      line-height: 34px;
-      text-align: left;
-      font-weight: 700;
-      margin: 30px 0 0;
-    }
-    
-    p {
-      margin-left: 20px;
-    }
-    
-    small {
-      display: block;
-      margin-top: 5px;
-      margin-bottom: 35px;
-      color: #666;
-    }
-    
-    .emoji-link {
-      margin: 20px 0;
-    }
-    
-    .flex-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .flex-item-title {
-      flex: 3;
-      margin-right: 50px;
-    }
-    
-    .flex-item-id {
-      flex: 1;
-    }
-    
-    .copy-button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 15px;
-      font-size: 17px;
-      background-color: #395b91;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    
-    .copy-button:hover {
-      background-color: #2164cf;
-    }
-    
-    textarea {
-      display: none;
-      width: 100%;
-      height: 200px;
-      margin-top: 20px;
-    }
-      
-    .validator-link {
-      background:#fff7f7;
-      padding: 10px;
-      border-radius: 10px;
-      color: #900;
-      font-size: 14px;
-      text-transform: none;
-    }
-      
-    .theme-form label {
-      padding: 2px;
-    }
-    .theme-form select {
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      background-color: #ffefd9;
-    }
-    .menu-button {
-      display: block;
-      float: left;
-      border-radius: 5px;
-      background-color: #646464;
-      font-size: 15px;
-      color: #ffffff;
-      border: none;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
-      }
-      .menu-button:hover {
-          background-color: #ff6200;
-      }
-      .tool-title {
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 30px;
-        padding: 20px;
-      }
-</style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 90%;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        h2 {
+            font-weight: 500;
+            font-size: 32px;
+            line-height: 42px;
+            margin: 30px 0 0;
+            text-align: center;
+            color: #45464e;
+        }
+
+        h3 {
+            font-size: 24px;
+            line-height: 34px;
+            font-weight: 700;
+            margin: 30px 0 20px;
+        }
+
+        p {
+            margin-left: 20px;
+        }
+
+        .small {
+            color: #666;
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        .emoji-link {
+            margin: 20px 0;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flex-item-title {
+            flex: 3;
+            margin-right: 50px;
+        }
+
+        .flex-item-id {
+            flex: 1;
+        }
+
+        .copy-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 15px;
+            font-size: 17px;
+            background-color: #395b91;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .copy-button:hover {
+            background-color: #2164cf;
+        }
+
+        textarea {
+            display: none;
+            width: 100%;
+            height: 200px;
+            margin-top: 20px;
+        }
+
+        .validator-link {
+            background: #fff7f7;
+            padding: 10px;
+            border-radius: 10px;
+            color: #900;
+            font-size: 14px;
+            text-transform: none;
+        }
+
+        .theme-form label {
+            padding: 2px;
+        }
+
+        .theme-form select {
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background-color: #ffefd9;
+        }
+
+        .menu-button {
+            display: block;
+            float: left;
+            border-radius: 5px;
+            background-color: #646464;
+            font-size: 15px;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            background-color: #ff6200;
+        }
+
+        .tool-title {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+    </style>
 </head>
-<button class="menu-button" onclick="window.location.href='../index.html'"><</button>
 <body>
+    <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
     <h1 class="tool-title">Générateur de mini FAQ</h1>
     <form id="theme-form" class="theme-form">
-      <label for="theme-selector">Type de page :</label>
-      <select id="theme-selector">
-        <option value="service">Service</option>
-        <option value="assistant">Assistant</option>
-      </select>
+        <label for="theme-selector">Type de page :</label>
+        <select id="theme-selector">
+            <option value="service">Service</option>
+            <option value="assistant">Assistant</option>
+        </select>
     </form>
     <form id="title-form">
-      <div class="flex-container">
-        <div class="flex-item-title">
-          <label for="faq-title">Titre de la FAQ:</label>
-          <input type="text" id="faq-title" name="faq-title" placeholder="Ajouter le titre" required>
+        <div class="flex-container">
+            <div class="flex-item-title">
+                <label for="faq-title">Titre de la mini FAQ:</label>
+                <input type="text" id="faq-title" name="faq-title" placeholder="ajouter un titre" required>
+            </div>
+            <div class="flex-item-id">
+                <label for="faq-id">ID :</label>
+                <input type="text" id="faq-id" name="faq-id" placeholder="ajouter un id" required>
+            </div>
         </div>
-        <div class="flex-item-id">
-          <label for="faq-id">ID :</label>
-          <input type="text" id="faq-id" name="faq-id" placeholder="id" required>
-        </div>
-      </div>
-      <button type="submit">Mettre à jour le titre</button>
+        <button type="submit">Mettre à jour le titre</button>
     </form>
-      
+    <h3>Ajouter une question :</h3>
     <form id="faq-form">
-      <label for="emoji">Emoji:</label>
+      <label for="emoji">Emoji de la question: <a class="small" href="https://emojikeyboard.top/fr/#kb-search" target="_blank"> Cliquez ici pour copier des emojis</a></label>
       <input type="text" id="emoji" name="emoji" placeholder="📂" required>
-      <small>Appuyez sur Windows + . (point) pour ouvrir le clavier emoji ou <a href="https://emojikeyboard.top/fr/#kb-search" target="_blank">cliquez ici pour copier des emojis</a></small>
       <label for="question">Question:</label>
-      <input type="text" id="question" name="question" required>
+      <input type="text" id="question" name="question" placeholder="Quels sont les différents métiers du secrétariat ?" required>
       <label for="answer">Réponse:</label>
-      <input type="text" id="answer" name="answer" required></input>
+      <input type="text" id="answer" name="answer" placeholder="Les métiers du secrétariat sont nombreux et concernent principalement : le métier de secrétariat commercial, secrétariat comptable, secrétariat juridique, secrétariat médical, secrétariat administratif, secrétariat social etc." required></input>
       <button type="submit">Ajouter à la FAQ</button>
     </form>
-    
     <div id="faq-content">
-      <h2 id="id-faq"></h2>
-      <div id="faq-wrapper" itemscope itemtype="https://schema.org/FAQPage">
-        <ul id="faq-container">
-          <!-- FAQ entries will be added here -->
-        </ul>
-      </div>
+        <h2 id="id-faq"></h2>
+        <div id="faq-wrapper" itemscope itemtype="https://schema.org/FAQPage">
+            <ul id="faq-container">
+                <!-- FAQ entries will be added here -->
+            </ul>
+        </div>
     </div>
-    
+
     <textarea id="generated-code"></textarea>
-    <button class="copy-button" onclick="copyFAQCode()">Générer le code de la FAQ</button>
+    <button class="copy-button" onclick="copyFAQCode()">Générer la mini FAQ</button>
     <a class="validator-link" href="https://validator.schema.org/" target="_blank">Tester les données structurées</a>
-    
+
     <script>
-    document.getElementById('theme-selector').addEventListener('change', function(event) {
-      const theme = event.target.value;
-      const themeFormSelect = document.querySelector('.theme-form select');
-      if (theme === 'assistant') {
-        document.documentElement.style.setProperty('--question-color', '#58c254');
-        themeFormSelect.style.backgroundColor = '#e7fae6';
-      } else {
-        document.documentElement.style.setProperty('--question-color', '#ff7620');
-        themeFormSelect.style.backgroundColor = '#ffefd9';
-      }
-    });
-    
-    document.getElementById('title-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-    
-      const titleInput = document.getElementById('faq-title');
-      const idInput = document.getElementById('faq-id');
-    
-      const titleText = titleInput.value;
-      const idText = idInput.value;
-    
-      const faqTitle = document.querySelector('h2');
-      faqTitle.textContent = titleText;
-      faqTitle.id = idText;
-    });
-    
-    document.getElementById('faq-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-    
-      const emojiInput = document.getElementById('emoji');
-      const questionInput = document.getElementById('question');
-      const answerInput = document.getElementById('answer');
-    
-      const emojiText = emojiInput.value;
-      const questionText = questionInput.value;
-      const answerText = answerInput.value;
-    
-      addFaqEntry(emojiText, questionText, answerText);
-    
-      emojiInput.value = '';
-      questionInput.value = '';
-      answerInput.value = '';
-    });
-    
-    function addFaqEntry(emoji, question, answer) {
-      const faqContainer = document.getElementById('faq-container');
-    
-      const faqItem = document.createElement('li');
-      faqItem.setAttribute('itemscope', '');
-      faqItem.setAttribute('itemtype', 'https://schema.org/Question');
-      faqItem.setAttribute('itemprop', 'mainEntity');
-    
-      const questionTitle = document.createElement('h3');
-      questionTitle.innerHTML = `<span itemprop="name">${emoji} ${question}</span>`;
-      questionTitle.style.color = getComputedStyle(document.documentElement).getPropertyValue('--question-color');
-      faqItem.appendChild(questionTitle);
-    
-      const answerDiv = document.createElement('div');
-      answerDiv.setAttribute('itemscope', '');
-      answerDiv.setAttribute('itemtype', 'https://schema.org/Answer');
-      answerDiv.setAttribute('itemprop', 'acceptedAnswer');
-    
-      const answerText = document.createElement('p');
-      answerText.setAttribute('itemprop', 'text');
-      answerText.innerText = answer;
-      answerDiv.appendChild(answerText);
-    
-      faqContainer.appendChild(faqItem);
-    }
-    
-    function copyFAQCode() {
-      const faqContent = document.getElementById('faq-content');
-      const generatedCode = document.getElementById('generated-code');
-      generatedCode.value = faqContent.outerHTML;
-      generatedCode.style.display = 'block';
-      generatedCode.select();
-    
-      try {
-        document.execCommand('copy');
-        alert('Le code de la FAQ a été copié dans le presse-papiers');
-      } catch (err) {
-        alert('Impossible de copier le code');
-      }
-    
-      window.getSelection().removeAllRanges();
-    }
+        document.getElementById('theme-selector').addEventListener('change', function(event) {
+            const theme = event.target.value;
+            const themeFormSelect = document.querySelector('.theme-form select');
+            if (theme === 'assistant') {
+                document.documentElement.style.setProperty('--question-color', '#58c254');
+                themeFormSelect.style.backgroundColor = '#e7fae6';
+            } else {
+                document.documentElement.style.setProperty('--question-color', '#ff7620');
+                themeFormSelect.style.backgroundColor = '#ffefd9';
+            }
+        });
+
+        document.getElementById('title-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const titleInput = document.getElementById('faq-title');
+            const idInput = document.getElementById('faq-id');
+
+            const titleText = titleInput.value;
+            const idText = idInput.value;
+
+            const faqTitle = document.querySelector('h2');
+            faqTitle.textContent = titleText;
+            faqTitle.id = idText;
+        });
+
+        document.getElementById('faq-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const emojiInput = document.getElementById('emoji');
+            const questionInput = document.getElementById('question');
+            const answerInput = document.getElementById('answer');
+
+            const emojiText = emojiInput.value;
+            const questionText = questionInput.value;
+            const answerText = answerInput.value;
+
+            if (!isEmoji(emojiText)) {
+                alert('Veuillez entrer un emoji valide.');
+                return;
+            }
+
+            addFaqEntry(emojiText, questionText, answerText);
+
+            emojiInput.value = '';
+            questionInput.value = '';
+            answerInput.value = '';
+        });
+
+        function isEmoji(input) {
+            const regex = /^(?:\p{Emoji_Presentation}|\p{Extended_Pictographic})$/u;
+            return regex.test(input);
+        }
+
+        function addFaqEntry(emoji, question, answer) {
+            const faqContainer = document.getElementById('faq-container');
+
+            const faqItem = document.createElement('li');
+            faqItem.setAttribute('itemscope', '');
+            faqItem.setAttribute('itemtype', 'https://schema.org/Question');
+            faqItem.setAttribute('itemprop', 'mainEntity');
+
+            const questionTitle = document.createElement('h3');
+            questionTitle.innerHTML = `<span itemprop="name">${emoji} ${question}</span>`;
+            questionTitle.style.color = getComputedStyle(document.documentElement).getPropertyValue('--question-color');
+            faqItem.appendChild(questionTitle);
+
+            const answerDiv = document.createElement('div');
+            answerDiv.setAttribute('itemscope', '');
+            answerDiv.setAttribute('itemtype', 'https://schema.org/Answer');
+            answerDiv.setAttribute('itemprop', 'acceptedAnswer');
+
+            const answerText = document.createElement('p');
+            answerText.setAttribute('itemprop', 'text');
+            answerText.innerText = answer;
+            answerDiv.appendChild(answerText);
+
+            faqItem.appendChild(answerDiv);
+            faqContainer.appendChild(faqItem);
+        }
+
+        function copyFAQCode() {
+            const faqContent = document.getElementById('faq-content');
+            const generatedCode = document.getElementById('generated-code');
+            generatedCode.value = faqContent.outerHTML;
+            generatedCode.style.display = 'block';
+            generatedCode.select();
+
+            try {
+                document.execCommand('copy');
+                alert('Le code de la FAQ a été copié dans le presse-papiers');
+            } catch (err) {
+                alert('Impossible de copier le code');
+            }
+
+            window.getSelection().removeAllRanges();
+        }
     </script>
-    </body>
+</body>
 </html>

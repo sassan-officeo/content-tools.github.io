@@ -1,68 +1,136 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
     <title>Générateur de sommaire</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             color: #333;
             text-align: center;
             padding: 20px;
         }
-        .list-summary-wrapper {
-        display: flex;
-        justify-content: center;
+
+        textarea {
+            width: 60%;
+            height: 80px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-        .list-summary-wrapper .list-summary-box {
-            background-color: #f6f6f6;
+
+        button {
+            font-size: 16px;
+            margin: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #0e8b49;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #07a14f;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .output {
+            text-align: left;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .output p {
+            margin: 5px 0;
+        }
+
+        .list-summary-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .list-summary-box {
+            background-color: #F6F6F6;
             padding: 30px 60px;
         }
-        .list-summary-wrapper .list-summary-box .list-summary-title {
-            font-weight: 700;
+
+        .list-summary-title {
+            font-weight: bold;
             font-size: 24px;
             padding-bottom: 0;
+            text-align: left;
         }
-        .list-summary-wrapper .list-summary-box .list-summary {
-            padding-left: 0;
-            margin-bottom: 0;
+
+        .list-summary:last-child {
+            margin: 0;
         }
-        li {
-            display: list-item;
-            text-align: -webkit-match-parent;
-            unicode-bidi: isolate;
+
+        .list-summary {
+            padding-left: 0px;
+            margin-bottom: 0px;
         }
-        .list-summary-wrapper .list-summary-box .list-summary li a {
+
+        .list-summary > ul {
+            padding: 0 0 0 40px;
+        }
+
+        .list-summary li {
+            list-style: none;
+            margin-left: 1.2em;
+            text-align: left;
+            line-height: 28px;
+        }
+
+        .list-summary li::before {
+            color: #FF7620;
+            content: "\2022";
+            display: inline-block;
+            width: 1.2em;
+            margin-left: -1.2em;
+        }
+
+        .list-summary a {
             text-decoration: none;
             border-bottom: inherit;
             color: inherit;
             cursor: pointer;
         }
-        a {
-            color: #ff7620;
-        }
-        .form-group {
-            display: flex;
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            width: 200px;
-        }
-        .form-group input {
-            flex: 1;
-        }
-        .configuration-sommaire {
-            margin-bottom: 20px;
-        }
-        .generate-button {
-            margin-left: 10px;
-        }
-        h2 {
-            display: block;
-            color: #333;
-            text-align: center;
+
+        .list-summary a:hover {
+            color: #FF7620;
         }
         .menu-button {
           display: block;
@@ -80,70 +148,174 @@
           background-color: #ff6200;
       }
       .tool-title {
-        text-align: center;
-        margin-bottom: 20px;
-        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
       }
-</style>
+    </style>
 </head>
-<button class="menu-button" onclick="window.location.href='../index.html'"><</button>
 <body>
+    <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
     <h1 class="tool-title">Générateur de sommaire</h1>
-    <textarea name="summary" id="summary"></textarea>
-    <button class="generate-button" onclick="generateSummary()">Générer le sommaire</button>
+    <p>Copiez le code de votre page sur le CMS comme suivant</p>
+    <img src="copycms.png" alt="Copier le code de la page" height="100px">
+    <p>Collez le ci dessous</p>
+    <textarea id="html-input" placeholder="Code HTML de la page..."></textarea><br>
+    <button onclick="extractH2TitlesAndIds()">Extraire les Titres et IDs</button>
+    <div id="output"></div>
+    <button id="update-html" style="display: none;" onclick="updateHtmlWithIds()">Mettre à jour les Titres et IDs</button>
+    <div id="summary" class="list-summary-wrapper" style="display: none;">
+        <div class="list-summary-box">
+            <p class="list-summary-title">Sommaire</p>
+            <ul class="list-summary" id="summary-list"></ul>
+        </div>
     </div>
-</body>
-<script>
-function addRow() {
-    const table = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+    <button id="copy-summary" style="display: none;" onclick="copySummaryCode()">Copier le code du sommaire</button><br>
+    <p id="info" style="display: none;">Si le sommaire est déjà fonctionnel sur votre page, il n'est pas nécéssaire de le remplacer</p>
+    <script>
+        let titlesAndIds = [];
 
-    const cell1 = newRow.insertCell(0);
-    const cell2 = newRow.insertCell(1);
-    const cell3 = newRow.insertCell(2);
+        function extractH2TitlesAndIds() {
+            const htmlInput = document.getElementById('html-input').value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlInput, 'text/html');
+            const h2Elements = doc.querySelectorAll('h2');
+            titlesAndIds = [];
 
-    const titreInput = document.createElement('input');
-    titreInput.type = 'text';
-    titreInput.name = 'titre';
-    cell1.appendChild(titreInput);
+            h2Elements.forEach((h2, index) => {
+                if (!h2.classList.contains('no-summary')) {
+                    const title = h2.textContent.trim();
+                    let h2Id = h2.getAttribute('id') || '';
+                    const aElement = h2.querySelector('a[id]');
+                    let aId = aElement ? aElement.getAttribute('id') : '';
 
-    const idTitreInput = document.createElement('input');
-    idTitreInput.type = 'text';
-    idTitreInput.name = 'id-titre';
-    cell2.appendChild(idTitreInput);
+                    // Si l'ID est présent à la fois dans <h2> et <a>, conserver celui de <a> et supprimer celui de <h2>
+                    if (h2Id && aId && h2Id === aId) {
+                        h2.removeAttribute('id');
+                    }
 
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Supprimer';
-    deleteButton.onclick = function () {
-        deleteRow(this);
-    };
-    cell3.appendChild(deleteButton);
-}
+                    const finalId = aId || h2Id;
+                    titlesAndIds.push({ index, title, id: finalId });
+                }
+            });
 
-function deleteRow(button) {
-    const row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-}
+            displayTitlesAndIds(titlesAndIds);
+            generateSummary(titlesAndIds);
+        }
 
-function generateSummary() {
-    const table = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
-    const rows = table.getElementsByTagName('tr');
-    const summaryList = document.querySelector('.list-summary-wrapper .list-summary');
-    summaryList.innerHTML = ''; // Clear existing summary items
+        function displayTitlesAndIds(titlesAndIds) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
 
-    for (let i = 0; i < rows.length; i++) {
-        const titre = rows[i].getElementsByTagName('input')[0].value;
-        const idTitre = rows[i].getElementsByTagName('input')[1].value;
+            if (titlesAndIds.length > 0) {
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
 
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${idTitre}`;
-        a.textContent = titre;
+                thead.innerHTML = `
+                    <tr>
+                        <th>#</th>
+                        <th>Titre</th>
+                        <th>ID du titre</th>
+                    </tr>
+                `;
 
-        li.appendChild(a);
-        summaryList.appendChild(li);
-    }
-}
-</script>
+                titlesAndIds.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td><input type="text" value="${item.title}" data-index="${item.index}" onchange="updateTitle(${item.index}, this.value)"></td>
+                        <td><input type="text" value="${item.id}" data-index="${item.index}" onchange="updateId(${item.index}, this.value)"></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                outputDiv.appendChild(table);
+
+                document.getElementById('update-html').style.display = 'inline-block';
+            } else {
+                outputDiv.textContent = 'Aucun titre H2 trouvé.';
+            }
+        }
+
+        function updateTitle(index, newTitle) {
+            titlesAndIds[index].title = newTitle;
+        }
+
+        function updateId(index, newId) {
+            titlesAndIds[index].id = newId;
+        }
+
+        function updateHtmlWithIds() {
+            const htmlInput = document.getElementById('html-input').value;
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlInput, 'text/html');
+            titlesAndIds.forEach(item => {
+                const h2 = doc.querySelectorAll('h2')[item.index];
+                h2.setAttribute('id', item.id);
+                let aElement = h2.querySelector('a[id]');
+                if (!aElement) {
+                    aElement = document.createElement('a');
+                    h2.prepend(aElement);
+                }
+                aElement.setAttribute('id', item.id);
+                h2.removeAttribute('id');  // Supprime l'ID du <h2> pour éviter les doublons
+                h2.textContent = item.title;  // Met à jour le texte du <h2>
+                h2.prepend(aElement); // Réinsère l'élément <a> après mise à jour du texte
+            });
+
+            const updatedHtml = new XMLSerializer().serializeToString(doc);
+            document.getElementById('html-input').value = updatedHtml;
+            alert('Code bien mise à jour. Vous pouvez maintenant le copier et le remplacer dans votre page');
+            generateSummary(titlesAndIds);  // Met à jour le sommaire avec les nouvelles valeurs
+        }
+
+        function generateSummary(titlesAndIds) {
+            const summaryList = document.getElementById('summary-list');
+            summaryList.innerHTML = '';
+
+            titlesAndIds.forEach(item => {
+                if (item.id) {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.setAttribute('href', `#${item.id}`);
+                    link.textContent = item.title;
+                    listItem.appendChild(link);
+                    summaryList.appendChild(listItem);
+                }
+            });
+            document.getElementById('summary').style.display = 'flex';
+            document.getElementById('copy-summary').style.display = 'inline-block';
+            document.getElementById('info').style.display = 'inline-block';
+        }
+
+        function copySummaryCode() {
+            const summaryHtml = `
+<div class="list-summary-wrapper">
+   <div class="list-summary-box">
+     <p class="list-summary-title">Sommaire</p>
+     <ul class="list-summary">
+${titlesAndIds.map(item => item.id ? `<li><a href="#${item.id}">${item.title}</a></li>` : '').join('')}
+     </ul>
+   </div>
+ </div>`;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = summaryHtml;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Le code du sommaire a été copié dans le presse-papiers.');
+        }
+
+        function scrollToHeadline(tag, id) {
+            const element = document.querySelector(`${tag}[id="${id}"]`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
 </body>
 </html>

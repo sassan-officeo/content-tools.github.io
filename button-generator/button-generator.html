@@ -70,6 +70,22 @@
         flex: 0 0 50%;
         max-width: 50%;
     }
+    .copy-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 15px;
+      font-size: 17px;
+      background-color: #395b91;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    
+    .copy-button:hover {
+      background-color: #2164cf;
+    }
+
     .menu-button {
           display: block;
           float: left;
@@ -112,7 +128,7 @@
         <input type="text" id="linkTextSingle" placeholder="Texte" oninput="updateSingleButton()">
     </div>
     <div style="text-align: center; margin-bottom: 20px;">
-        <label for="linkHrefSingle">Lien URL :</label>
+        <label for="linkHrefSingle">Lien du bouton :</label>
         <input type="text" id="linkHrefSingle" placeholder="https://officeopro.com/" oninput="updateSingleButton()">
     </div>
     <div style="text-align: center; margin-top: 20px;">
@@ -122,7 +138,7 @@
     </div>
     <br>
     <div style="text-align: center; margin-top: 20px;">
-        <button style="border-style:none; background-color: #588888; color: #fff; border-radius: 5px; padding: 10px" onclick="copySingleButtonCode()">Copier le code</button>
+        <button class="copy-button" onclick="copySingleButtonCode()">Copier le code</button>
     </div>
 
     <!-- Formulaire pour créer deux boutons alignés -->
@@ -181,7 +197,7 @@ data-wpel-link="internal" target="_self" rel="follow">
     </div>
     <br>
     <div style="text-align: center; margin-top: 20px;">
-        <button style="border-style:none; background-color: #588888; color: #fff; border-radius: 5px; padding: 10px" onclick="copyLinkCode()">Copier le code</button>
+        <button class="copy-button" onclick="copyLinkCode()">Copier le code</button>
     </div>
 <script>
     function updateLink(buttonNumber) {
