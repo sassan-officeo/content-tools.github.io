@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="https://officeopro.com/wp-content/uploads/2020/06/cropped-carre-orange@4xfixed-1-32x32.png" sizes="32x32" />
+    <title>Optimisation tableau</title>
+    <style>
+
+      h2 {
+        color: #333;
+        text-align: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .menu-button {
+          display: block;
+          float: left;
+          border-radius: 5px;
+          background-color: #646464;
+          font-size: 15px;
+          color: #ffffff;
+          border: none;
+          padding: 10px;
+          text-align: center;
+          cursor: pointer;
+      }
+      .menu-button:hover {
+          background-color: #ff6200;
+      }
+  
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        textarea {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            background-color: #18963a;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #tableContainer {
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+            width: 40%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 10px; /* Taille réduite pour le résultat du tableau */
+        }
+        #outputCode {
+            font-size: 0px; /* Taille réduite pour le code généré */
+            white-space: pre-wrap;
+        }
+        .copy-button { text-align: center;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            background-color: #1259de;
+            color: white;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+      .tool-title {
+        text-align: center;
+      }
+</style>
+<button class="menu-button" onclick="window.location.href='../index.html'"><</button>
+<h1 class="tool-title">Optimisation tableau</h1>
+<title>Uniformiser la hauteur des cellules du tableau</title>
+<form id="tableForm">
+    <label for="tableCode">Code du tableau HTML :</label><br><br>
+    <textarea id="tableCode" rows="10" placeholder="Collez ici le code HTML du tableau"></textarea><br><br>
+    <button type="button" onclick="processTable()">Uniformiser la hauteur des cellules</button>
+    <button type="button" onclick="toggleColors()">Modifier les couleurs</button>
+</form>
+
+<h2>Résultat</h2>
+<div id="tableContainer"></div>
+
+<div id="outputCode"></div>
+<button class="copy-button" onclick="copyToClipboard()">Copier le code</button>
+
+<script>
+function processTable() {
+    // Récupérer le code HTML du tableau entré par l'utilisateur
+    var tableCode = document.getElementById("tableCode").value;
+    
+    // Injecter le code du tableau dans le conteneur
+    var tableContainer = document.getElementById("tableContainer");
+    tableContainer.innerHTML = tableCode;
+    
+    // Sélectionner la table et vérifier/ajuster la hauteur
+    var table = tableContainer.querySelector("table");
+    if (table) {
+        table.style.height = "350px";
+    }
+
+    // Sélectionner toutes les lignes du tableau injecté
+    var rows = tableContainer.querySelectorAll("tr");
+
+    // Variables pour vérifier les couleurs consécutives
+    var previousRowColored = false;
+
+    // Appliquer les couleurs en respectant la règle 1/2
+    rows.forEach(function(row, index) {
+        row.style.height = "27px";
+
+        // Sélectionner toutes les cellules dans chaque ligne
+        var cells = row.querySelectorAll("td");
+
+        // Fixer la hauteur de chaque cellule à 10px
+        cells.forEach(function(cell) {
+            cell.style.height = "10px";
+        });
+
+        // Vérifier si la ligne actuelle est colorée
+        const firstCell = row.querySelector("td");
+        const bgColor = firstCell ? window.getComputedStyle(firstCell).backgroundColor : 'rgba(0, 0, 0, 0)';
+
+        if (bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+            if (previousRowColored) {
+                // Si la ligne précédente est aussi colorée, enlever la couleur actuelle
+                cells.forEach(function(cell) {
+                    cell.style.backgroundColor = '#ffffff';
+                });
+                previousRowColored = false; // La ligne actuelle devient blanche
+            } else {
+                previousRowColored = true; // La ligne actuelle est colorée
+            }
+        } else {
+            previousRowColored = false; // La ligne actuelle n'est pas colorée
+        }
+    });
+
+    // Afficher le nouveau code HTML dans la div #outputCode
+    var outputCode = document.getElementById("outputCode");
+    outputCode.textContent = tableContainer.innerHTML;
+}
+
+function toggleColors() {
+    const rows = document.querySelectorAll('#tableContainer tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach(cell => {
+            const currentBgColor = window.getComputedStyle(cell).backgroundColor;
+            if (currentBgColor === 'rgb(255, 239, 217)') { // #ffefd9 in RGB
+                cell.style.backgroundColor = '#e7fae6';
+            } else if (currentBgColor === 'rgb(231, 250, 230)') { // #e7fae6 in RGB
+                cell.style.backgroundColor = '#ffefd9';
+            }
+        });
+    });
+
+    const links = document.querySelectorAll('#tableContainer a');
+    links.forEach(link => {
+        const currentColor = window.getComputedStyle(link).color;
+        if (currentColor === 'rgb(88, 194, 84)') { // #58c254 in RGB
+            link.style.color = '#ff7620';
+            link.style.borderBottomColor = '#ff7620';
+        } else if (currentColor === 'rgb(255, 118, 32)') { // #ff7620 in RGB
+            link.style.color = '#58c254';
+            link.style.borderBottomColor = '#58c254';
+        }
+    });
+
+    // Mettre à jour le code HTML après la modification des couleurs
+    var outputCode = document.getElementById("outputCode");
+    outputCode.textContent = document.getElementById("tableContainer").innerHTML;
+}
+
+function copyToClipboard() {
+    var outputCode = document.getElementById("outputCode");
+    var range = document.createRange();
+    range.selectNode(outputCode);
+    window.getSelection().removeAllRanges(); // Clear any existing selections
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges(); // Deselect after copy
+    alert("Le code a été copié dans le presse-papiers !");
+}
+</script>
+
+</body>
