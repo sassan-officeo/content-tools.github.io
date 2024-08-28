@@ -168,11 +168,11 @@
     <form id="title-form">
         <div class="flex-container">
             <div class="flex-item-title">
-                <label for="faq-title">Titre de la mini FAQ:</label>
+                <label for="faq-title">Titre :</label>
                 <input type="text" id="faq-title" name="faq-title" placeholder="ajouter un titre" required>
             </div>
             <div class="flex-item-id">
-                <label for="faq-id">ID :</label>
+                <label for="faq-id">ID : (pour sommaire)</label>
                 <input type="text" id="faq-id" name="faq-id" placeholder="ajouter un id" required>
             </div>
         </div>
@@ -181,7 +181,7 @@
     <h3>Ajouter une question :</h3>
     <form id="faq-form">
       <label for="emoji">Emoji de la question: <a class="small" href="https://emojikeyboard.top/fr/#kb-search" target="_blank"> Cliquez ici pour copier des emojis</a></label>
-      <input type="text" id="emoji" name="emoji" placeholder="📂" required>
+      <input type="text" id="emoji" name="emoji" placeholder="Insérer un emoji" required>
       <label for="question">Question:</label>
       <input type="text" id="question" name="question" placeholder="Quels sont les différents métiers du secrétariat ?" required>
       <label for="answer">Réponse:</label>
@@ -239,22 +239,12 @@
             const questionText = questionInput.value;
             const answerText = answerInput.value;
 
-            if (!isEmoji(emojiText)) {
-                alert('Veuillez entrer un emoji valide.');
-                return;
-            }
-
             addFaqEntry(emojiText, questionText, answerText);
 
             emojiInput.value = '';
             questionInput.value = '';
             answerInput.value = '';
         });
-
-        function isEmoji(input) {
-            const regex = /^(?:\p{Emoji_Presentation}|\p{Extended_Pictographic})$/u;
-            return regex.test(input);
-        }
 
         function addFaqEntry(emoji, question, answer) {
             const faqContainer = document.getElementById('faq-container');
