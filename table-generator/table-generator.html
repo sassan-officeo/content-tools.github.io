@@ -288,138 +288,145 @@
       </div>
     </div>
     <script>
-      function modifyTable(action, target, color) {
-        const tableBody = document.querySelector("table tbody");
-        const table = document.querySelector("table");
+     document.addEventListener("DOMContentLoaded", function () {
+      applyColor(); // Apply initial default color selection
 
-        function styleRows() {
-          for (let i = 0; i < tableBody.rows.length; i++) {
-            tableBody.rows[i].style.backgroundColor = i % 2 === 0 ? color : ""; // Apply chosen color or reset
-          }
-        }
+      document.querySelector("table").addEventListener("click", function (e) {
+        if (e.target.tagName === "TD" || e.target.tagName === "A") {
+          document
+            .querySelectorAll("td")
+            .forEach((td) => td.classList.remove("selected"));
+          const cell =
+            e.target.tagName === "A" ? e.target.parentElement : e.target;
+          cell.classList.add("selected");
 
-        function copyTableHTML() {
-          if (table) {
-            navigator.clipboard
-              .writeText(table.outerHTML)
-              .then(() => alert("Tableau copié"))
-              .catch((err) =>
-                console.error("Failed to copy table HTML: ", err)
-              );
-          } else {
-            alert("No table found to copy!");
-          }
-        }
-
-        if (action === "add-row") {
-          const newRow = tableBody.insertRow();
-          for (let i = 0; i < tableBody.rows[0].cells.length; i++) {
-            const newCell = newRow.insertCell();
-            const link = document.createElement("a");
-            link.href = "#";
-            link.target = "_blank";
-            link.textContent = "lien";
-            newCell.appendChild(link);
-          }
-        } else if (action === "remove-row") {
-          if (tableBody.rows.length > 1) {
-            tableBody.deleteRow(target ? target : tableBody.rows.length - 1);
-          } else {
-            alert("Cannot remove the only row!");
-          }
-        } else if (action === "add-column") {
-          for (let i = 0; i < tableBody.rows.length; i++) {
-            const newCell = tableBody.rows[i].insertCell();
-            const link = document.createElement("a");
-            link.href = "#";
-            link.target = "_blank";
-            link.textContent = "lien";
-            newCell.appendChild(link);
-          }
-        } else if (action === "remove-column") {
-          if (tableBody.rows[0].cells.length > 1) {
-            for (let i = 0; i < tableBody.rows.length; i++) {
-              tableBody.rows[i].deleteCell(
-                target ? target : tableBody.rows[i].cells.length - 1
-              );
-            }
-          } else {
-            alert("Cannot remove the only column!");
-          }
-        } else if (action === "copy-html") {
-          copyTableHTML();
-        }
-
-        styleRows(); // Re-apply the row styling with the new color
-      }
-
-      function applyColor() {
-        const selectedColor = document.querySelector(
-          'input[name="color"]:checked'
-        ).value;
-        const links = document.querySelectorAll("table tbody a");
-
-        if (selectedColor === "#e7fae6") {
-          // If "Assistants" model is chosen
-          links.forEach((link) => {
-            link.style.color = "#58c254";
-          });
-        } else if (selectedColor === "#ffefd9") {
-          // If "Services" model is chosen
-          links.forEach((link) => {
-            link.style.color = "#ff7620";
-          });
-        } else {
-          links.forEach((link) => {
-            link.style.color = ""; // Reset to default color
-          });
-        }
-
-        modifyTable("refresh", null, selectedColor); // Handle this action to refresh styles without changing table structure
-      }
-
-      function addLink() {
-        const linkInput = document.getElementById("linkInput").value;
-        const linkText = document.getElementById("linkText").value;
-        const selectedCell = document.querySelector("table tbody td.selected");
-        if (selectedCell && linkInput && linkText) {
-          const link = selectedCell.querySelector("a");
+          // Mise à jour des champs linkInput et linkText
+          const link = cell.querySelector("a");
           if (link) {
-            link.href = linkInput;
-            link.textContent = linkText;
+            document.getElementById("linkInput").value = link.href;
+            document.getElementById("linkText").value = link.textContent;
           } else {
-            const newLink = document.createElement("a");
-            newLink.href = linkInput;
-            newLink.target = "_blank";
-            newLink.textContent = linkText;
-            selectedCell.innerHTML = "";
-            selectedCell.appendChild(newLink);
+            document.getElementById("linkInput").value = "/lien-page/";
+            document.getElementById("linkText").value = "Texte du lien";
           }
-        } else {
-          alert("Please select a cell and enter a valid link and text.");
+        }
+      });
+    });
+
+    function modifyTable(action, target, color) {
+      const tableBody = document.querySelector("table tbody");
+      const table = document.querySelector("table");
+
+      function styleRows() {
+        for (let i = 0; i < tableBody.rows.length; i++) {
+          tableBody.rows[i].style.backgroundColor = i % 2 === 0 ? color : ""; // Apply chosen color or reset
         }
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        applyColor(); // Apply initial default color selection
+      function copyTableHTML() {
+        if (table) {
+          navigator.clipboard
+            .writeText(table.outerHTML)
+            .then(() => alert("Tableau copié"))
+            .catch((err) => console.error("Failed to copy table HTML: ", err));
+        } else {
+          alert("No table found to copy!");
+        }
+      }
 
-        document.querySelector("table").addEventListener("click", function (e) {
-          if (e.target.tagName === "TD" || e.target.tagName === "A") {
-            document
-              .querySelectorAll("td")
-              .forEach((td) => td.classList.remove("selected"));
-            const cell =
-              e.target.tagName === "A" ? e.target.parentElement : e.target;
-            cell.classList.add("selected");
+      if (action === "add-row") {
+        const newRow = tableBody.insertRow();
+        for (let i = 0; i < tableBody.rows[0].cells.length; i++) {
+          const newCell = newRow.insertCell();
+          const link = document.createElement("a");
+          link.href = "/lien-page/";
+          link.target = "_blank";
+          link.textContent = "texte du lien";
+          newCell.appendChild(link);
+        }
+      } else if (action === "remove-row") {
+        if (tableBody.rows.length > 1) {
+          tableBody.deleteRow(target ? target : tableBody.rows.length - 1);
+        } else {
+          alert("Cannot remove the only row!");
+        }
+      } else if (action === "add-column") {
+        for (let i = 0; i < tableBody.rows.length; i++) {
+          const newCell = tableBody.rows[i].insertCell();
+          const link = document.createElement("a");
+          link.href = "/lien-page/";
+          link.target = "_blank";
+          link.textContent = "texte du lien";
+          newCell.appendChild(link);
+        }
+      } else if (action === "remove-column") {
+        if (tableBody.rows[0].cells.length > 1) {
+          for (let i = 0; i < tableBody.rows.length; i++) {
+            tableBody.rows[i].deleteCell(
+              target ? target : tableBody.rows[i].cells.length - 1
+            );
           }
-        });
-      });
+        } else {
+          alert("Cannot remove the only column!");
+        }
+      } else if (action === "copy-html") {
+        copyTableHTML();
+      }
 
-      document
-        .getElementById("copyTable")
-        .addEventListener("click", function () {
-          modifyTable("copy-html"); // Use this to trigger copying HTML
+      styleRows(); // Re-apply the row styling with the new color
+    }
+
+    function applyColor() {
+      const selectedColor = document.querySelector(
+        'input[name="color"]:checked'
+      ).value;
+      const links = document.querySelectorAll("table tbody a");
+
+      if (selectedColor === "#e7fae6") {
+        // If "Assistants" model is chosen
+        links.forEach((link) => {
+          link.style.color = "#58c254";
         });
+      } else if (selectedColor === "#ffefd9") {
+        // If "Services" model is chosen
+        links.forEach((link) => {
+          link.style.color = "#ff7620";
+        });
+      } else {
+        links.forEach((link) => {
+          link.style.color = ""; // Reset to default color
+        });
+      }
+
+      modifyTable("refresh", null, selectedColor); // Handle this action to refresh styles without changing table structure
+    }
+
+    function addLink() {
+      const linkInput = document.getElementById("linkInput").value;
+      const linkText = document.getElementById("linkText").value;
+      const selectedCell = document.querySelector("table tbody td.selected");
+      if (selectedCell && linkInput && linkText) {
+        const link = selectedCell.querySelector("a");
+        if (link) {
+          link.href = linkInput;
+          link.textContent = linkText;
+        } else {
+          const newLink = document.createElement("a");
+          newLink.href = linkInput;
+          newLink.target = "_blank";
+          newLink.textContent = linkText;
+          selectedCell.innerHTML = "";
+          selectedCell.appendChild(newLink);
+        }
+      } else {
+        alert("Please select a cell and enter a valid link and text.");
+      }
+    }
+
+    document.getElementById("copyTable").addEventListener("click", function () {
+      modifyTable("copy-html"); // Use this to trigger copying HTML
+    });
+
     </script>
   </body>
 </html>
