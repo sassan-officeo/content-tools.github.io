@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Bloc HTML avec Emoji</title>
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0 auto;
+            padding: 20px;
+            width: 45%;
+            align-content: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+            color: #555;
+        }
+
+        input[type="text"],
+        textarea {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+            background-color: #475865;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        h3 {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        pre {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .menu-button {
+            width: 35px;
+            display: block;
+            float: left;
+            border-radius: 5px;
+            background-color: #646464;
+            font-size: 15px;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            background-color: #ff6200;
+        }
+
+        .tool-title {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-button" onclick="window.location.href='../index.html'"><</button>
+    <h1 class="tool-title">Générateur de bloc highlight</h1>
+    <label for="emojilabel">Emoji :
+    <a style="font-size: 13px; color: #645e5e;" href="https://emojikeyboard.top/fr/" target="_blank">Cliquez ici pour copier un emoji</a>
+    </label>
+    <input type="text" id="emoji" placeholder="💡" value="💡">
+    <br><br>
+    <label for="text">Entrez votre paragraphe :</label>
+    <textarea id="text" placeholder="Votre texte ici..."></textarea>
+    <button onclick="generateBlock()">Générer le bloc HTML</button>
+    <br><br>
+    <pre id="output"></pre>
+    <button onclick="copyToClipboard()">Copier le code</button>
+</div>
+
+<script>
+        function generateBlock() {
+            var emoji = document.getElementById("emoji").value;
+            var text = document.getElementById("text").value;
+
+            var blockHTML = `
+<div style="background-color: #f9f9f9; border-left: 5px solid #f1c40f; padding: 15px; margin: 20px 0; border-radius: 5px; display: flex; align-items: center; font-family: Arial, sans-serif;">
+    <div style="display: flex; align-items: center;">
+        <span style="font-size: 30px; margin-right: 15px;">${emoji}</span>
+        <p style="margin: 0; font-size: 16px; color: #333; line-height: 1.5;">${text}</p>
+    </div>
+</div>
+`;
+
+            document.getElementById("output").textContent = blockHTML;
+        }
+
+        function copyToClipboard() {
+            var output = document.getElementById("output").textContent;
+            navigator.clipboard.writeText(output).then(function() {
+                alert('Code copié dans le presse-papier !');
+            }, function(err) {
+                alert('Erreur lors de la copie : ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
